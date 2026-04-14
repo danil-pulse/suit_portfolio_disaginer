@@ -1,0 +1,265 @@
+/* =============================================================================
+   PHOTOGRAPHY GALLERY COMPONENT STYLES
+   Галерея фотографий с фильтрацией
+   ============================================================================= */
+
+.photography-gallery {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: oklch(from var(--secondary) l c h / 30%);
+}
+
+@media (min-width: 1024px) {
+  .photography-gallery {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.photography-gallery__container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .photography-gallery__container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* =============================================================================
+   ЗАГОЛОВОК СЕКЦИИ
+   ============================================================================= */
+
+.photography-gallery__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .photography-gallery__header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.photography-gallery__subtitle {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.photography-gallery__title {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  color: var(--foreground);
+}
+
+@media (min-width: 768px) {
+  .photography-gallery__title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .photography-gallery__title {
+    font-size: 3rem;
+  }
+}
+
+.photography-gallery__description {
+  color: var(--muted-foreground);
+  max-width: 28rem;
+  text-wrap: pretty;
+}
+
+/* =============================================================================
+   ФИЛЬТРЫ (TABS)
+   ============================================================================= */
+
+.photography-gallery__filters {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.photography-gallery__filter-button {
+  border-radius: 9999px;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.photography-gallery__filter-button:hover {
+  background-color: var(--secondary);
+}
+
+.photography-gallery__filter-button--active {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  border-color: var(--primary);
+}
+
+/* =============================================================================
+   СЕТКА ФОТОГРАФИЙ
+   ============================================================================= */
+
+.photography-gallery__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .photography-gallery__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .photography-gallery__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* =============================================================================
+   КАРТОЧКА ФОТО
+   ============================================================================= */
+
+.photography-gallery__photo-card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background-color: var(--muted);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.photography-gallery__photo-card:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.photography-gallery__photo-card:hover .photography-gallery__photo-image {
+  transform: scale(1.05);
+}
+
+.photography-gallery__photo-card:hover .photography-gallery__photo-overlay {
+  opacity: 1;
+}
+
+.photography-gallery__photo-card:hover .photography-gallery__photo-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Изображение */
+.photography-gallery__photo-image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Оверлей */
+.photography-gallery__photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Контент */
+.photography-gallery__photo-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  transform: translateY(1rem);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.photography-gallery__photo-title {
+  color: white;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  text-align: left;
+}
+
+.photography-gallery__photo-description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  text-align: left;
+}
+
+/* =============================================================================
+   LIGHTBOX ДИАЛОГ
+   ============================================================================= */
+
+.photography-gallery__lightbox {
+  max-width: 80rem;
+  width: 100%;
+  padding: 0;
+  background-color: black;
+  border: none;
+  overflow: hidden;
+}
+
+.photography-gallery__lightbox-wrapper {
+  position: relative;
+}
+
+.photography-gallery__lightbox-image-container {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  width: 100%;
+}
+
+.photography-gallery__lightbox-image {
+  object-fit: contain;
+}
+
+.photography-gallery__lightbox-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.photography-gallery__lightbox-title {
+  color: white;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+}
+
+.photography-gallery__lightbox-description {
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.25rem;
+}

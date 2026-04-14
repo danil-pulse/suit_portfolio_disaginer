@@ -1,0 +1,260 @@
+/* =============================================================================
+   CONTACT BOOKING COMPONENT STYLES
+   Секция контактов и бронирования
+   ============================================================================= */
+
+.contact-booking {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 1024px) {
+  .contact-booking {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.contact-booking__container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .contact-booking__container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* =============================================================================
+   ОСНОВНАЯ СЕТКА
+   ============================================================================= */
+
+.contact-booking__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .contact-booking__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+  }
+}
+
+/* =============================================================================
+   СЕКЦИЯ ИНФОРМАЦИИ
+   ============================================================================= */
+
+.contact-booking__info-section {
+  /* Контейнер с контактной информацией */
+}
+
+.contact-booking__subtitle {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.contact-booking__title {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .contact-booking__title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-booking__title {
+    font-size: 3rem;
+  }
+}
+
+.contact-booking__description {
+  color: var(--muted-foreground);
+  line-height: 1.625;
+  margin-bottom: 2.5rem;
+}
+
+/* Контактные данные */
+.contact-booking__contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-booking__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contact-booking__contact-icon {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background-color: var(--secondary);
+  color: var(--foreground);
+}
+
+.contact-booking__contact-label {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.contact-booking__contact-value {
+  color: var(--foreground);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.contact-booking__contact-value:hover {
+  color: var(--accent);
+}
+
+.contact-booking__contact-text {
+  color: var(--foreground);
+  white-space: pre-line;
+}
+
+/* Социальные сети */
+.contact-booking__social-section {
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.contact-booking__social-label {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-bottom: 1rem;
+}
+
+.contact-booking__social-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contact-booking__social-link {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background-color: var(--secondary);
+  color: var(--foreground);
+  transition: all 0.2s ease;
+}
+
+.contact-booking__social-link:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* =============================================================================
+   СЕКЦИЯ ФОРМЫ
+   ============================================================================= */
+
+.contact-booking__form-section {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .contact-booking__form-section {
+    padding: 2rem;
+  }
+}
+
+.contact-booking__tabs {
+  width: 100%;
+}
+
+.contact-booking__tabs-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 2rem;
+}
+
+.contact-booking__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-booking__field-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .contact-booking__field-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.contact-booking__submit-note {
+  font-size: 0.75rem;
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+/* =============================================================================
+   СЕКЦИЯ УСПЕШНОЙ ОТПРАВКИ
+   ============================================================================= */
+
+.contact-booking__success {
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+}
+
+.contact-booking__success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  background-color: oklch(from var(--accent) l c h / 10%);
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.contact-booking__success-title {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  color: var(--foreground);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .contact-booking__success-title {
+    font-size: 2.25rem;
+  }
+}
+
+.contact-booking__success-message {
+  color: var(--muted-foreground);
+  font-size: 1.125rem;
+}
+
+.contact-booking__success-button {
+  margin-top: 2rem;
+}

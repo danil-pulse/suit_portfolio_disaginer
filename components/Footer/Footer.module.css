@@ -1,0 +1,232 @@
+/* =============================================================================
+   FOOTER COMPONENT STYLES
+   Подвал сайта
+   ============================================================================= */
+
+.footer {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.footer__container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .footer__container {
+    padding: 5rem 2rem;
+  }
+}
+
+/* =============================================================================
+   СЕТКА КОНТЕНТА
+   ============================================================================= */
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* =============================================================================
+   СЕКЦИЯ БРЕНДА
+   ============================================================================= */
+
+.footer__brand-section {
+  /* На больших экранах занимает 1 колонку */
+}
+
+.footer__brand-link {
+  display: block;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer__brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+}
+
+.footer__brand-description {
+  color: oklch(from var(--primary-foreground) l c h / 70%);
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+/* Социальные иконки */
+.footer__social-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.footer__social-link {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: oklch(from var(--primary-foreground) l c h / 10%);
+  transition: background-color 0.2s ease;
+  color: inherit;
+}
+
+.footer__social-link:hover {
+  background-color: oklch(from var(--primary-foreground) l c h / 20%);
+}
+
+/* =============================================================================
+   СЕКЦИИ ССЫЛОК
+   ============================================================================= */
+
+.footer__links-section {
+  /* Стандартная секция ссылок */
+}
+
+.footer__links-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(from var(--primary-foreground) l c h / 50%);
+  margin-bottom: 1rem;
+}
+
+.footer__links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer__link {
+  font-size: 0.875rem;
+  color: oklch(from var(--primary-foreground) l c h / 70%);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.footer__link:hover {
+  color: var(--primary-foreground);
+}
+
+/* =============================================================================
+   СЕКЦИЯ ПОДПИСКИ
+   ============================================================================= */
+
+.footer__newsletter-section {
+  /* Секция формы подписки */
+}
+
+.footer__newsletter-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(from var(--primary-foreground) l c h / 50%);
+  margin-bottom: 1rem;
+}
+
+.footer__newsletter-description {
+  font-size: 0.875rem;
+  color: oklch(from var(--primary-foreground) l c h / 70%);
+  margin-bottom: 1rem;
+}
+
+.footer__newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer__newsletter-input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  background-color: oklch(from var(--primary-foreground) l c h / 10%);
+  border: 1px solid oklch(from var(--primary-foreground) l c h / 20%);
+  border-radius: 0.5rem;
+  color: var(--primary-foreground);
+}
+
+.footer__newsletter-input::placeholder {
+  color: oklch(from var(--primary-foreground) l c h / 40%);
+}
+
+.footer__newsletter-input:focus {
+  outline: none;
+  border-color: oklch(from var(--primary-foreground) l c h / 50%);
+}
+
+.footer__newsletter-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: var(--primary-foreground);
+  color: var(--primary);
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.footer__newsletter-button:hover {
+  background-color: oklch(from var(--primary-foreground) l c h / 90%);
+}
+
+/* =============================================================================
+   НИЖНЯЯ ПАНЕЛЬ
+   ============================================================================= */
+
+.footer__bottom {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid oklch(from var(--primary-foreground) l c h / 10%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .footer__bottom {
+    flex-direction: row;
+  }
+}
+
+.footer__copyright {
+  font-size: 0.875rem;
+  color: oklch(from var(--primary-foreground) l c h / 50%);
+}
+
+.footer__legal-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.footer__legal-link {
+  font-size: 0.875rem;
+  color: oklch(from var(--primary-foreground) l c h / 50%);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.footer__legal-link:hover {
+  color: var(--primary-foreground);
+}

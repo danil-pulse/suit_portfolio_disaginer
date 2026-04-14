@@ -5,8 +5,9 @@ import Link from "next/link"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { LanguageSwitcher } from "@/components/language-switcher"
+import { LanguageSwitcher } from "@/components/LanguageSwitcher/LanguageSwitcher"
 import { useLanguage } from "@/lib/language-context"
+import styles from "./Header.module.css"
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -21,37 +22,37 @@ export function Header() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <nav className="flex items-center justify-between h-16 lg:h-20">
-          <Link href="/" className="flex flex-col">
-            <span className="font-serif text-xl lg:text-2xl tracking-tight text-foreground">
+    <header className={styles.header}>
+      <div className={styles.header__container}>
+        <nav className={styles.header__nav}>
+          <Link href="/" className={styles.header__brand}>
+            <span className={styles["header__brand-title"]}>
               {t.header.title}
             </span>
-            <span className="text-xs text-muted-foreground tracking-widest uppercase">
+            <span className={styles["header__brand-subtitle"]}>
               {t.header.subtitle}
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className={styles["header__desktop-nav"]}>
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide uppercase"
+                className={styles["header__nav-link"]}
               >
                 {item.label}
               </Link>
             ))}
             <LanguageSwitcher />
-            <Button asChild size="sm" className="ml-2">
+            <Button asChild size="sm" className={styles["header__book-button"]}>
               <Link href="#contact">{t.nav.bookNow}</Link>
             </Button>
           </div>
 
           {/* Mobile Navigation */}
-          <div className="flex items-center gap-2 md:hidden">
+          <div className={styles["header__mobile-nav"]}>
             <LanguageSwitcher />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
@@ -61,18 +62,18 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-full max-w-sm">
-                <div className="flex flex-col gap-8 mt-12">
+                <div className={styles["header__mobile-menu"]}>
                   {navItems.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={() => setIsOpen(false)}
-                      className="text-2xl font-serif text-foreground hover:text-accent transition-colors"
+                      className={styles["header__mobile-link"]}
                     >
                       {item.label}
                     </Link>
                   ))}
-                  <Button asChild size="lg" className="mt-4">
+                  <Button asChild size="lg" className={styles["header__mobile-book-button"]}>
                     <Link href="#contact" onClick={() => setIsOpen(false)}>
                       {t.nav.bookNow}
                     </Link>

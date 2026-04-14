@@ -1,0 +1,305 @@
+/* =============================================================================
+   DESIGN PORTFOLIO COMPONENT STYLES
+   Портфолио дизайн-проектов
+   ============================================================================= */
+
+.design-portfolio {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 1024px) {
+  .design-portfolio {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.design-portfolio__container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .design-portfolio__container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* =============================================================================
+   ЗАГОЛОВОК СЕКЦИИ
+   ============================================================================= */
+
+.design-portfolio__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .design-portfolio__header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.design-portfolio__subtitle {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.design-portfolio__title {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  color: var(--foreground);
+}
+
+@media (min-width: 768px) {
+  .design-portfolio__title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .design-portfolio__title {
+    font-size: 3rem;
+  }
+}
+
+.design-portfolio__description {
+  color: var(--muted-foreground);
+  max-width: 28rem;
+  text-wrap: pretty;
+}
+
+/* =============================================================================
+   СЕТКА ПРОЕКТОВ
+   ============================================================================= */
+
+.design-portfolio__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .design-portfolio__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =============================================================================
+   КАРТОЧКА ПРОЕКТА
+   ============================================================================= */
+
+.design-portfolio__project-card {
+  text-align: left;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  padding: 0;
+}
+
+.design-portfolio__project-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.design-portfolio__project-card:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.design-portfolio__project-card:hover .design-portfolio__project-image {
+  transform: scale(1.05);
+}
+
+.design-portfolio__project-card:hover .design-portfolio__project-title {
+  color: var(--accent);
+}
+
+.design-portfolio__project-card:hover .design-portfolio__project-arrow {
+  opacity: 1;
+}
+
+/* Контейнер изображения */
+.design-portfolio__image-container {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--muted);
+}
+
+.design-portfolio__project-image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+/* Кнопка со стрелкой */
+.design-portfolio__project-arrow {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.design-portfolio__arrow-icon {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  padding: 0.5rem;
+  border-radius: 9999px;
+}
+
+/* Контент карточки */
+.design-portfolio__project-content {
+  padding: 1.5rem;
+}
+
+.design-portfolio__project-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.design-portfolio__project-category {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.design-portfolio__project-separator {
+  color: var(--muted-foreground);
+}
+
+.design-portfolio__project-year {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.design-portfolio__project-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--foreground);
+  transition: color 0.2s ease;
+}
+
+.design-portfolio__project-description {
+  margin-top: 0.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Теги */
+.design-portfolio__project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* =============================================================================
+   МОДАЛЬНОЕ ОКНО ПРОЕКТА
+   ============================================================================= */
+
+.design-portfolio__modal {
+  max-width: 48rem;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.design-portfolio__modal-image-container {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background-color: var(--muted);
+}
+
+.design-portfolio__modal-image {
+  object-fit: cover;
+}
+
+.design-portfolio__modal-content {
+  padding: 2rem;
+}
+
+.design-portfolio__modal-header {
+  margin-bottom: 1.5rem;
+}
+
+.design-portfolio__modal-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.design-portfolio__modal-category {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.design-portfolio__modal-separator {
+  color: var(--muted-foreground);
+}
+
+.design-portfolio__modal-year {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.design-portfolio__modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  color: var(--foreground);
+}
+
+/* Детали проекта */
+.design-portfolio__modal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.design-portfolio__detail-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.design-portfolio__detail-value {
+  color: var(--foreground);
+}
+
+.design-portfolio__detail-text {
+  color: var(--muted-foreground);
+  line-height: 1.625;
+}
+
+.design-portfolio__modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

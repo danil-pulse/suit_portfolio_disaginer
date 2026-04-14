@@ -13,6 +13,7 @@ import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import { FieldGroup, Field, FieldLabel } from "@/components/ui/field"
 import { useLanguage } from "@/lib/language-context"
+import styles from "./ContactBooking.module.css"
 
 const timeSlots = [
   "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
@@ -47,19 +48,19 @@ export function ContactBooking() {
 
   if (isSubmitted) {
     return (
-      <section id="contact" className="py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 text-accent mb-6">
+      <section id="contact" className={styles["contact-booking"]}>
+        <div className={styles["contact-booking__success"]}>
+          <div className={styles["contact-booking__success-icon"]}>
             <CheckCircle className="h-8 w-8" />
           </div>
-          <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
+          <h2 className={styles["contact-booking__success-title"]}>
             {t.contact.thankYou}
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className={styles["contact-booking__success-message"]}>
             {t.contact.thankYouMessage}
           </p>
           <Button 
-            className="mt-8"
+            className={styles["contact-booking__success-button"]}
             onClick={() => setIsSubmitted(false)}
           >
             {t.contact.sendAnother}
@@ -70,53 +71,53 @@ export function ContactBooking() {
   }
 
   return (
-    <section id="contact" className="py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+    <section id="contact" className={styles["contact-booking"]}>
+      <div className={styles["contact-booking__container"]}>
+        <div className={styles["contact-booking__grid"]}>
           {/* Contact Info */}
-          <div>
-            <p className="text-sm tracking-widest uppercase text-muted-foreground mb-2">
+          <div className={styles["contact-booking__info-section"]}>
+            <p className={styles["contact-booking__subtitle"]}>
               {t.contact.subtitle}
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
+            <h2 className={styles["contact-booking__title"]}>
               {t.contact.title}
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-10">
+            <p className={styles["contact-booking__description"]}>
               {t.contact.description}
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-secondary text-foreground">
+            <div className={styles["contact-booking__contact-list"]}>
+              <div className={styles["contact-booking__contact-item"]}>
+                <div className={styles["contact-booking__contact-icon"]}>
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">{t.contact.email}</p>
-                  <a href="mailto:hello@ilyaoblog.com" className="text-foreground hover:text-accent transition-colors">
+                  <p className={styles["contact-booking__contact-label"]}>{t.contact.email}</p>
+                  <a href="mailto:hello@ilyaoblog.com" className={styles["contact-booking__contact-value"]}>
                     hello@ilyaoblog.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-secondary text-foreground">
+              <div className={styles["contact-booking__contact-item"]}>
+                <div className={styles["contact-booking__contact-icon"]}>
                   <Phone className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">{t.contact.phone}</p>
-                  <a href="tel:+12125551234" className="text-foreground hover:text-accent transition-colors">
+                  <p className={styles["contact-booking__contact-label"]}>{t.contact.phone}</p>
+                  <a href="tel:+12125551234" className={styles["contact-booking__contact-value"]}>
                     +1 (212) 555-1234
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-secondary text-foreground">
+              <div className={styles["contact-booking__contact-item"]}>
+                <div className={styles["contact-booking__contact-icon"]}>
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">{t.contact.studio}</p>
-                  <p className="text-foreground whitespace-pre-line">
+                  <p className={styles["contact-booking__contact-label"]}>{t.contact.studio}</p>
+                  <p className={styles["contact-booking__contact-text"]}>
                     {t.contact.address}
                   </p>
                 </div>
@@ -124,19 +125,19 @@ export function ContactBooking() {
             </div>
 
             {/* Social Links */}
-            <div className="mt-10 pt-10 border-t border-border">
-              <p className="text-sm text-muted-foreground mb-4">{t.contact.followAlong}</p>
-              <div className="flex items-center gap-4">
+            <div className={styles["contact-booking__social-section"]}>
+              <p className={styles["contact-booking__social-label"]}>{t.contact.followAlong}</p>
+              <div className={styles["contact-booking__social-links"]}>
                 <a
                   href="#"
-                  className="p-3 rounded-lg bg-secondary text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className={styles["contact-booking__social-link"]}
                   aria-label="Instagram"
                 >
                   <Instagram className="h-5 w-5" />
                 </a>
                 <a
                   href="#"
-                  className="p-3 rounded-lg bg-secondary text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className={styles["contact-booking__social-link"]}
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-5 w-5" />
@@ -146,16 +147,16 @@ export function ContactBooking() {
           </div>
 
           {/* Form */}
-          <div className="bg-card border border-border rounded-2xl p-6 lg:p-8">
-            <Tabs defaultValue="inquiry" className="w-full">
-              <TabsList className="w-full grid grid-cols-2 mb-8">
+          <div className={styles["contact-booking__form-section"]}>
+            <Tabs defaultValue="inquiry" className={styles["contact-booking__tabs"]}>
+              <TabsList className={styles["contact-booking__tabs-list"]}>
                 <TabsTrigger value="inquiry">{t.contact.generalInquiry}</TabsTrigger>
                 <TabsTrigger value="booking">{t.contact.bookSession}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="inquiry">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className={styles["contact-booking__form"]}>
+                  <FieldGroup className={styles["contact-booking__field-row"]}>
                     <Field>
                       <FieldLabel htmlFor="firstName">{t.contact.firstName}</FieldLabel>
                       <Input id="firstName" placeholder="John" required />
@@ -211,8 +212,8 @@ export function ContactBooking() {
               </TabsContent>
 
               <TabsContent value="booking">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className={styles["contact-booking__form"]}>
+                  <FieldGroup className={styles["contact-booking__field-row"]}>
                     <Field>
                       <FieldLabel htmlFor="bookingFirstName">{t.contact.firstName}</FieldLabel>
                       <Input id="bookingFirstName" placeholder="John" required />
@@ -223,7 +224,7 @@ export function ContactBooking() {
                     </Field>
                   </FieldGroup>
 
-                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <FieldGroup className={styles["contact-booking__field-row"]}>
                     <Field>
                       <FieldLabel htmlFor="bookingEmail">{t.contact.emailLabel}</FieldLabel>
                       <Input id="bookingEmail" type="email" placeholder="john@example.com" required />
@@ -250,7 +251,7 @@ export function ContactBooking() {
                     </Select>
                   </Field>
 
-                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <FieldGroup className={styles["contact-booking__field-row"]}>
                     <Field>
                       <FieldLabel>{t.contact.preferredDate}</FieldLabel>
                       <Popover>
@@ -317,7 +318,7 @@ export function ContactBooking() {
                     )}
                   </Button>
 
-                  <p className="text-xs text-center text-muted-foreground">
+                  <p className={styles["contact-booking__submit-note"]}>
                     {t.contact.confirmNote}
                   </p>
                 </form>

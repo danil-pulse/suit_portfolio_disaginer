@@ -1,0 +1,15 @@
+/* =============================================================================
+   LANGUAGE SWITCHER COMPONENT STYLES
+   Переключатель языка
+   ============================================================================= */
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.language-switcher__separator {
+  color: var(--muted-foreground);
+}

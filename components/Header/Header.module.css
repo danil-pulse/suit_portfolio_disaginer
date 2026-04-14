@@ -1,0 +1,148 @@
+/* =============================================================================
+   HEADER COMPONENT STYLES
+   Навигационная шапка сайта
+   ============================================================================= */
+
+/* Основной контейнер header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: oklch(from var(--background) l c h / 80%);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Внутренний контейнер с ограничением ширины */
+.header__container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .header__container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Навигационная панель */
+.header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .header__nav {
+    height: 5rem;
+  }
+}
+
+/* =============================================================================
+   ЛОГОТИП / БРЕНД
+   ============================================================================= */
+
+.header__brand {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.header__brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  letter-spacing: -0.025em;
+  color: var(--foreground);
+}
+
+@media (min-width: 1024px) {
+  .header__brand-title {
+    font-size: 1.5rem;
+  }
+}
+
+.header__brand-subtitle {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* =============================================================================
+   ДЕСКТОПНАЯ НАВИГАЦИЯ
+   ============================================================================= */
+
+.header__desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .header__desktop-nav {
+    display: flex;
+  }
+}
+
+.header__nav-link {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  transition: color 0.2s ease;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.header__nav-link:hover {
+  color: var(--foreground);
+}
+
+.header__book-button {
+  margin-left: 0.5rem;
+}
+
+/* =============================================================================
+   МОБИЛЬНАЯ НАВИГАЦИЯ
+   ============================================================================= */
+
+.header__mobile-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .header__mobile-nav {
+    display: none;
+  }
+}
+
+.header__mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.header__mobile-link {
+  font-size: 1.5rem;
+  font-family: var(--font-serif);
+  color: var(--foreground);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.header__mobile-link:hover {
+  color: var(--accent);
+}
+
+.header__mobile-book-button {
+  margin-top: 1rem;
+}

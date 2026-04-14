@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import styles from "./FeaturedWork.module.css"
 
 export function FeaturedWork() {
   const { t } = useLanguage()
@@ -60,65 +61,56 @@ export function FeaturedWork() {
   ]
 
   return (
-    <section id="work" className="py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-12">
+    <section id="work" className={styles["featured-work"]}>
+      <div className={styles["featured-work__container"]}>
+        <div className={styles["featured-work__header"]}>
           <div>
-            <p className="text-sm tracking-widest uppercase text-muted-foreground mb-2">
+            <p className={styles["featured-work__subtitle"]}>
               {t.featuredWork.subtitle}
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground">
+            <h2 className={styles["featured-work__title"]}>
               {t.featuredWork.title}
             </h2>
           </div>
-          <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="#photography"
-              className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
+          <div className={styles["featured-work__nav-links"]}>
+            <Link href="#photography" className={styles["featured-work__nav-link"]}>
               {t.featuredWork.photography}
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className={`h-4 w-4 ${styles["featured-work__nav-arrow"]}`} />
             </Link>
-            <Link
-              href="#design"
-              className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
+            <Link href="#design" className={styles["featured-work__nav-link"]}>
               {t.featuredWork.design}
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className={`h-4 w-4 ${styles["featured-work__nav-arrow"]}`} />
             </Link>
           </div>
         </div>
 
         {/* Tetris-style Bento Grid */}
-        <div className="grid grid-cols-12 gap-4 lg:gap-6 auto-rows-[minmax(140px,1fr)]">
+        <div className={styles["featured-work__grid"]}>
           {/* Large card - spans 8 cols, 3 rows */}
           <Link
             href={featuredWorks[0].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-12 md:col-span-8 row-span-3"
+            className={`${styles["featured-work__card"]} ${styles["featured-work__card--large"]}`}
           >
             <Image
               src={featuredWorks[0].image}
               alt={featuredWorks[0].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className={styles["featured-work__card-image"]}
               sizes="(max-width: 768px) 100vw, 66vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
-              <div className="flex flex-wrap gap-2 mb-3">
+            <div className={styles["featured-work__card-overlay"]} />
+            <div className={`${styles["featured-work__card-content"]} ${styles["featured-work__card-content--large"]}`}>
+              <div className={styles["featured-work__tags"]}>
                 {featuredWorks[0].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-xs tracking-wide uppercase bg-white/10 backdrop-blur-sm text-white rounded-full"
-                  >
+                  <span key={tag} className={styles["featured-work__tag"]}>
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="font-serif text-2xl lg:text-3xl text-white group-hover:text-white/90 transition-colors">
+              <h3 className={`${styles["featured-work__card-title"]} ${styles["featured-work__card-title--large"]}`}>
                 {featuredWorks[0].title}
               </h3>
-              <p className="mt-2 text-white/70 text-sm max-w-md">
+              <p className={styles["featured-work__card-description"]}>
                 {featuredWorks[0].description}
               </p>
             </div>
@@ -127,28 +119,25 @@ export function FeaturedWork() {
           {/* Tall card - spans 4 cols, 2 rows */}
           <Link
             href={featuredWorks[1].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-12 md:col-span-4 row-span-2"
+            className={`${styles["featured-work__card"]} ${styles["featured-work__card--tall"]}`}
           >
             <Image
               src={featuredWorks[1].image}
               alt={featuredWorks[1].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className={styles["featured-work__card-image"]}
               sizes="(max-width: 768px) 100vw, 33vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6">
-              <div className="flex flex-wrap gap-2 mb-2">
+            <div className={styles["featured-work__card-overlay"]} />
+            <div className={styles["featured-work__card-content"]}>
+              <div className={`${styles["featured-work__tags"]} ${styles["featured-work__tags--small"]}`}>
                 {featuredWorks[1].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs tracking-wide uppercase bg-white/10 backdrop-blur-sm text-white rounded-full"
-                  >
+                  <span key={tag} className={`${styles["featured-work__tag"]} ${styles["featured-work__tag--small"]}`}>
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="font-serif text-xl lg:text-2xl text-white group-hover:text-white/90 transition-colors">
+              <h3 className={`${styles["featured-work__card-title"]} ${styles["featured-work__card-title--medium"]}`}>
                 {featuredWorks[1].title}
               </h3>
             </div>
@@ -157,18 +146,18 @@ export function FeaturedWork() {
           {/* Small card - spans 4 cols, 1 row */}
           <Link
             href={featuredWorks[2].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-6 md:col-span-4 row-span-1"
+            className={`${styles["featured-work__card"]} ${styles["featured-work__card--small"]}`}
           >
             <Image
               src={featuredWorks[2].image}
               alt={featuredWorks[2].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className={styles["featured-work__card-image"]}
               sizes="(max-width: 768px) 50vw, 33vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="font-serif text-lg text-white group-hover:text-white/90 transition-colors">
+            <div className={`${styles["featured-work__card-overlay"]} ${styles["featured-work__card-overlay--dark"]}`} />
+            <div className={`${styles["featured-work__card-content"]} ${styles["featured-work__card-content--small"]}`}>
+              <h3 className={`${styles["featured-work__card-title"]} ${styles["featured-work__card-title--small"]}`}>
                 {featuredWorks[2].title}
               </h3>
             </div>
@@ -177,51 +166,48 @@ export function FeaturedWork() {
           {/* Medium card - spans 6 cols, 2 rows */}
           <Link
             href={featuredWorks[3].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-12 md:col-span-6 row-span-2"
+            className={`${styles["featured-work__card"]} ${styles["featured-work__card--medium"]}`}
           >
             <Image
               src={featuredWorks[3].image}
               alt={featuredWorks[3].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className={styles["featured-work__card-image"]}
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <div className="flex flex-wrap gap-2 mb-2">
+            <div className={styles["featured-work__card-overlay"]} />
+            <div className={styles["featured-work__card-content"]}>
+              <div className={`${styles["featured-work__tags"]} ${styles["featured-work__tags--small"]}`}>
                 {featuredWorks[3].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs tracking-wide uppercase bg-white/10 backdrop-blur-sm text-white rounded-full"
-                  >
+                  <span key={tag} className={`${styles["featured-work__tag"]} ${styles["featured-work__tag--small"]}`}>
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="font-serif text-xl lg:text-2xl text-white group-hover:text-white/90 transition-colors">
+              <h3 className={`${styles["featured-work__card-title"]} ${styles["featured-work__card-title--medium"]}`}>
                 {featuredWorks[3].title}
               </h3>
-              <p className="mt-2 text-white/70 text-sm max-w-md hidden sm:block">
+              <p className={`${styles["featured-work__card-description"]} ${styles["featured-work__card-description--hidden"]}`}>
                 {featuredWorks[3].description}
               </p>
             </div>
           </Link>
 
-          {/* Small wide card - spans 6 cols, 1 row */}
+          {/* Small wide card - spans 3 cols, 1 row */}
           <Link
             href={featuredWorks[4].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-6 md:col-span-3 row-span-1"
+            className={`${styles["featured-work__card"]} ${styles["featured-work__card--wide"]}`}
           >
             <Image
               src={featuredWorks[4].image}
               alt={featuredWorks[4].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className={styles["featured-work__card-image"]}
               sizes="(max-width: 768px) 50vw, 25vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="font-serif text-base lg:text-lg text-white group-hover:text-white/90 transition-colors">
+            <div className={`${styles["featured-work__card-overlay"]} ${styles["featured-work__card-overlay--dark"]}`} />
+            <div className={`${styles["featured-work__card-content"]} ${styles["featured-work__card-content--small"]}`}>
+              <h3 className={`${styles["featured-work__card-title"]} ${styles["featured-work__card-title--base"]}`}>
                 {featuredWorks[4].title}
               </h3>
             </div>
@@ -230,28 +216,25 @@ export function FeaturedWork() {
           {/* Medium tall card - spans 3 cols, 2 rows */}
           <Link
             href={featuredWorks[5].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-6 md:col-span-3 row-span-2"
+            className={`${styles["featured-work__card"]} ${styles["featured-work__card--medium-tall"]}`}
           >
             <Image
               src={featuredWorks[5].image}
               alt={featuredWorks[5].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className={styles["featured-work__card-image"]}
               sizes="(max-width: 768px) 50vw, 25vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-              <div className="flex flex-wrap gap-1 mb-2">
+            <div className={styles["featured-work__card-overlay"]} />
+            <div className={styles["featured-work__card-content"]}>
+              <div className={`${styles["featured-work__tags"]} ${styles["featured-work__tags--small"]}`}>
                 {featuredWorks[5].tags.slice(0, 2).map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs tracking-wide uppercase bg-white/10 backdrop-blur-sm text-white rounded-full"
-                  >
+                  <span key={tag} className={`${styles["featured-work__tag"]} ${styles["featured-work__tag--small"]}`}>
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="font-serif text-lg lg:text-xl text-white group-hover:text-white/90 transition-colors">
+              <h3 className={`${styles["featured-work__card-title"]} ${styles["featured-work__card-title--small"]}`}>
                 {featuredWorks[5].title}
               </h3>
             </div>

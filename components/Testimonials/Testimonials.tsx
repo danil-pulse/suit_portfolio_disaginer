@@ -5,6 +5,7 @@ import Image from "next/image"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/lib/language-context"
+import styles from "./Testimonials.module.css"
 
 const testimonialImages = [
   "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&q=80",
@@ -34,29 +35,29 @@ export function Testimonials() {
   const currentTestimonial = testimonials[currentIndex]
 
   return (
-    <section className="py-24 lg:py-32 bg-primary text-primary-foreground">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-sm tracking-widest uppercase text-primary-foreground/60 mb-2">
+    <section className={styles.testimonials}>
+      <div className={styles.testimonials__container}>
+        <div className={styles.testimonials__header}>
+          <p className={styles.testimonials__subtitle}>
             {t.testimonials.subtitle}
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl">
+          <h2 className={styles.testimonials__title}>
             {t.testimonials.title}
           </h2>
         </div>
 
-        <div className="relative min-h-[320px] flex flex-col">
-          <div className="flex flex-col items-center text-center flex-1">
-            <div className="mb-6 text-primary-foreground/30">
+        <div className={styles.testimonials__slider}>
+          <div className={styles.testimonials__content}>
+            <div className={styles["testimonials__quote-icon"]}>
               <Quote className="h-10 w-10" />
             </div>
             
-            <blockquote className="text-lg leading-relaxed text-pretty max-w-3xl mb-8 min-h-[120px] flex items-center">
+            <blockquote className={styles.testimonials__quote}>
               <span>&ldquo;{currentTestimonial.quote}&rdquo;</span>
             </blockquote>
 
-            <div className="flex items-center gap-4">
-              <div className="relative w-14 h-14 rounded-full overflow-hidden">
+            <div className={styles["testimonials__author-info"]}>
+              <div className={styles["testimonials__author-image"]}>
                 <Image
                   src={currentTestimonial.image}
                   alt={currentTestimonial.author}
@@ -65,11 +66,11 @@ export function Testimonials() {
                   sizes="56px"
                 />
               </div>
-              <div className="text-left">
-                <p className="font-medium text-primary-foreground">
+              <div className={styles["testimonials__author-details"]}>
+                <p className={styles["testimonials__author-name"]}>
                   {currentTestimonial.author}
                 </p>
-                <p className="text-sm text-primary-foreground/60">
+                <p className={styles["testimonials__author-role"]}>
                   {currentTestimonial.role}
                 </p>
               </div>
@@ -77,26 +78,24 @@ export function Testimonials() {
           </div>
 
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
+          <div className={styles.testimonials__navigation}>
             <Button
               variant="outline"
               size="icon"
               onClick={prev}
-              className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+              className={styles["testimonials__nav-button"]}
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
             </Button>
             
-            <div className="flex items-center gap-2">
+            <div className={styles.testimonials__indicators}>
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === currentIndex 
-                      ? "bg-primary-foreground" 
-                      : "bg-primary-foreground/30"
+                  className={`${styles.testimonials__indicator} ${
+                    index === currentIndex ? styles["testimonials__indicator--active"] : ""
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -107,7 +106,7 @@ export function Testimonials() {
               variant="outline"
               size="icon"
               onClick={next}
-              className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+              className={styles["testimonials__nav-button"]}
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5" />

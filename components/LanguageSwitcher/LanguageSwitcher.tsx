@@ -3,12 +3,13 @@
 import { useLanguage } from "@/lib/language-context"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import styles from "./LanguageSwitcher.module.css"
 
 export function LanguageSwitcher({ className }: { className?: string }) {
   const { language, setLanguage } = useLanguage()
 
   return (
-    <div className={cn("flex items-center gap-1 text-sm", className)}>
+    <div className={cn(styles["language-switcher"], className)}>
       <Button
         variant="ghost"
         size="sm"
@@ -20,7 +21,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       >
         EN
       </Button>
-      <span className="text-muted-foreground">/</span>
+      <span className={styles["language-switcher__separator"]}>/</span>
       <Button
         variant="ghost"
         size="sm"

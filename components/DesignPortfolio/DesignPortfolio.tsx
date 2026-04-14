@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Badge } from "@/components/ui/badge"
 import { ArrowUpRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import styles from "./DesignPortfolio.module.css"
 
 export function DesignPortfolio() {
   const { t } = useLanguage()
@@ -84,58 +85,58 @@ export function DesignPortfolio() {
   ]
 
   return (
-    <section id="design" className="py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+    <section id="design" className={styles["design-portfolio"]}>
+      <div className={styles["design-portfolio__container"]}>
+        <div className={styles["design-portfolio__header"]}>
           <div>
-            <p className="text-sm tracking-widest uppercase text-muted-foreground mb-2">
+            <p className={styles["design-portfolio__subtitle"]}>
               {t.designPortfolio.subtitle}
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground">
+            <h2 className={styles["design-portfolio__title"]}>
               {t.designPortfolio.title}
             </h2>
           </div>
-          <p className="text-muted-foreground max-w-md text-pretty">
+          <p className={styles["design-portfolio__description"]}>
             {t.designPortfolio.description}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className={styles["design-portfolio__grid"]}>
           {projects.map((project) => (
             <button
               key={project.id}
               onClick={() => setSelectedProject(project)}
-              className="group text-left bg-card border border-border rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+              className={styles["design-portfolio__project-card"]}
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+              <div className={styles["design-portfolio__image-container"]}>
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className={styles["design-portfolio__project-image"]}
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-primary text-primary-foreground p-2 rounded-full">
+                <div className={styles["design-portfolio__project-arrow"]}>
+                  <div className={styles["design-portfolio__arrow-icon"]}>
                     <ArrowUpRight className="h-4 w-4" />
                   </div>
                 </div>
               </div>
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xs tracking-widest uppercase text-muted-foreground">
+              <div className={styles["design-portfolio__project-content"]}>
+                <div className={styles["design-portfolio__project-meta"]}>
+                  <span className={styles["design-portfolio__project-category"]}>
                     {project.category}
                   </span>
-                  <span className="text-muted-foreground">·</span>
-                  <span className="text-xs text-muted-foreground">{project.year}</span>
+                  <span className={styles["design-portfolio__project-separator"]}>·</span>
+                  <span className={styles["design-portfolio__project-year"]}>{project.year}</span>
                 </div>
-                <h3 className="font-serif text-2xl text-foreground group-hover:text-accent transition-colors">
+                <h3 className={styles["design-portfolio__project-title"]}>
                   {project.title}
                 </h3>
-                <p className="mt-2 text-muted-foreground text-sm line-clamp-2">
+                <p className={styles["design-portfolio__project-description"]}>
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mt-4">
+                <div className={styles["design-portfolio__project-tags"]}>
                   {project.tags.map((tag) => (
                     <Badge key={tag} variant="secondary" className="text-xs">
                       {tag}
@@ -150,54 +151,54 @@ export function DesignPortfolio() {
 
       {/* Project Detail Dialog */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-3xl w-full p-0 overflow-hidden">
+        <DialogContent className={styles["design-portfolio__modal"]}>
           {selectedProject && (
             <>
-              <div className="relative aspect-[16/9] w-full bg-muted">
+              <div className={styles["design-portfolio__modal-image-container"]}>
                 <Image
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   fill
-                  className="object-cover"
+                  className={styles["design-portfolio__modal-image"]}
                   sizes="100vw"
                 />
               </div>
-              <div className="p-8">
-                <DialogHeader className="mb-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-xs tracking-widest uppercase text-accent">
+              <div className={styles["design-portfolio__modal-content"]}>
+                <DialogHeader className={styles["design-portfolio__modal-header"]}>
+                  <div className={styles["design-portfolio__modal-meta"]}>
+                    <span className={styles["design-portfolio__modal-category"]}>
                       {selectedProject.category}
                     </span>
-                    <span className="text-muted-foreground">·</span>
-                    <span className="text-xs text-muted-foreground">{selectedProject.year}</span>
+                    <span className={styles["design-portfolio__modal-separator"]}>·</span>
+                    <span className={styles["design-portfolio__modal-year"]}>{selectedProject.year}</span>
                   </div>
-                  <DialogTitle className="font-serif text-3xl text-foreground">
+                  <DialogTitle className={styles["design-portfolio__modal-title"]}>
                     {selectedProject.title}
                   </DialogTitle>
                 </DialogHeader>
                 
-                <div className="space-y-6">
+                <div className={styles["design-portfolio__modal-details"]}>
                   <div>
-                    <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">
+                    <p className={styles["design-portfolio__detail-label"]}>
                       {t.designPortfolio.client}
                     </p>
-                    <p className="text-foreground">{selectedProject.client}</p>
+                    <p className={styles["design-portfolio__detail-value"]}>{selectedProject.client}</p>
                   </div>
                   
                   <div>
-                    <p className="text-xs tracking-widest uppercase text-muted-foreground mb-2">
+                    <p className={styles["design-portfolio__detail-label"]}>
                       {t.designPortfolio.aboutProject}
                     </p>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className={styles["design-portfolio__detail-text"]}>
                       {selectedProject.description}
                     </p>
                   </div>
                   
                   <div>
-                    <p className="text-xs tracking-widest uppercase text-muted-foreground mb-3">
+                    <p className={styles["design-portfolio__detail-label"]}>
                       {t.designPortfolio.services}
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className={styles["design-portfolio__modal-tags"]}>
                       {selectedProject.tags.map((tag) => (
                         <Badge key={tag} variant="outline">
                           {tag}
