@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -33,10 +34,15 @@ const WhatsAppIcon = () => (
   </svg>
 )
 
+// Компонент для иконки Max (использует изображение)
 const MaxIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-  </svg>
+  <Image 
+    src="/images/max-logo.png" 
+    alt="Max" 
+    width={20} 
+    height={20} 
+    className="h-5 w-5 rounded-sm"
+  />
 )
 
 type SendMethod = "telegram" | "email"
