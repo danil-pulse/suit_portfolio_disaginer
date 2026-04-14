@@ -4,9 +4,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { cn } from "@/lib/utils"
 
 export function FeaturedWork() {
   const { t } = useLanguage()
+  const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>()
 
   const featuredWorks = [
     {
@@ -22,7 +25,7 @@ export function FeaturedWork() {
       title: t.projects.siestaCampers.title,
       description: t.projects.siestaCampers.description,
       tags: [t.tags.photography, t.tags.branding],
-      image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
+      image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&q=80",
       href: "#photography",
     },
     {
@@ -60,14 +63,23 @@ export function FeaturedWork() {
   ]
 
   return (
-    <section id="work" className="py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-12">
-          <div>
-            <p className="text-sm tracking-widest uppercase text-muted-foreground mb-2">
+    <section
+      id="work"
+      ref={sectionRef}
+      className="section-padding"
+    >
+      <div className="mx-auto max-w-7xl container-padding">
+        <div
+          className={cn(
+            "flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 md:mb-12 transition-all duration-700",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          )}
+        >
+          <div className="section-header mb-0">
+            <p className="section-subtitle">
               {t.featuredWork.subtitle}
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground">
+            <h2 className="section-title">
               {t.featuredWork.title}
             </h2>
           </div>
@@ -89,36 +101,55 @@ export function FeaturedWork() {
           </div>
         </div>
 
+        {/* Mobile navigation links */}
+        <div className="flex md:hidden items-center gap-4 mb-6">
+          <Link
+            href="#photography"
+            className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {t.featuredWork.photography}
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+          <Link
+            href="#design"
+            className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {t.featuredWork.design}
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
         {/* Tetris-style Bento Grid */}
-        <div className="grid grid-cols-12 gap-4 lg:gap-6 auto-rows-[minmax(140px,1fr)]">
+        <div className="grid grid-cols-12 gap-3 md:gap-4 lg:gap-6 auto-rows-[minmax(120px,1fr)] md:auto-rows-[minmax(140px,1fr)]">
           {/* Large card - spans 8 cols, 3 rows */}
           <Link
             href={featuredWorks[0].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-12 md:col-span-8 row-span-3"
+            className={cn(
+              "portfolio-card col-span-12 md:col-span-8 row-span-2 md:row-span-3 transition-all duration-700",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            )}
+            style={{ transitionDelay: "100ms" }}
           >
             <Image
               src={featuredWorks[0].image}
               alt={featuredWorks[0].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="portfolio-card-image"
               sizes="(max-width: 768px) 100vw, 66vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-8">
-              <div className="flex flex-wrap gap-2 mb-3">
+            <div className="portfolio-card-overlay" />
+            <div className="portfolio-card-content">
+              <div className="flex flex-wrap gap-1.5 md:gap-2 mb-2 md:mb-3">
                 {featuredWorks[0].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 text-xs tracking-wide uppercase bg-white/10 backdrop-blur-sm text-white rounded-full"
-                  >
+                  <span key={tag} className="portfolio-card-tag">
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="font-serif text-2xl lg:text-3xl text-white group-hover:text-white/90 transition-colors">
+              <h3 className="portfolio-card-title text-xl md:text-2xl lg:text-3xl">
                 {featuredWorks[0].title}
               </h3>
-              <p className="mt-2 text-white/70 text-sm max-w-md">
+              <p className="mt-1.5 md:mt-2 text-white/70 text-xs md:text-sm max-w-md line-clamp-2">
                 {featuredWorks[0].description}
               </p>
             </div>
@@ -127,28 +158,29 @@ export function FeaturedWork() {
           {/* Tall card - spans 4 cols, 2 rows */}
           <Link
             href={featuredWorks[1].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-12 md:col-span-4 row-span-2"
+            className={cn(
+              "portfolio-card col-span-6 md:col-span-4 row-span-2 transition-all duration-700",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            )}
+            style={{ transitionDelay: "200ms" }}
           >
             <Image
               src={featuredWorks[1].image}
               alt={featuredWorks[1].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 33vw"
+              className="portfolio-card-image"
+              sizes="(max-width: 768px) 50vw, 33vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6">
-              <div className="flex flex-wrap gap-2 mb-2">
+            <div className="portfolio-card-overlay" />
+            <div className="portfolio-card-content p-3 md:p-5 lg:p-6">
+              <div className="flex flex-wrap gap-1 md:gap-2 mb-1.5 md:mb-2">
                 {featuredWorks[1].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs tracking-wide uppercase bg-white/10 backdrop-blur-sm text-white rounded-full"
-                  >
+                  <span key={tag} className="portfolio-card-tag text-[10px] md:text-xs">
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="font-serif text-xl lg:text-2xl text-white group-hover:text-white/90 transition-colors">
+              <h3 className="portfolio-card-title text-base md:text-xl lg:text-2xl">
                 {featuredWorks[1].title}
               </h3>
             </div>
@@ -157,18 +189,22 @@ export function FeaturedWork() {
           {/* Small card - spans 4 cols, 1 row */}
           <Link
             href={featuredWorks[2].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-6 md:col-span-4 row-span-1"
+            className={cn(
+              "portfolio-card col-span-6 md:col-span-4 row-span-1 transition-all duration-700",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            )}
+            style={{ transitionDelay: "300ms" }}
           >
             <Image
               src={featuredWorks[2].image}
               alt={featuredWorks[2].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="portfolio-card-image"
               sizes="(max-width: 768px) 50vw, 33vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="font-serif text-lg text-white group-hover:text-white/90 transition-colors">
+            <div className="portfolio-card-overlay" />
+            <div className="portfolio-card-content p-3 md:p-4">
+              <h3 className="portfolio-card-title text-sm md:text-lg">
                 {featuredWorks[2].title}
               </h3>
             </div>
@@ -177,31 +213,32 @@ export function FeaturedWork() {
           {/* Medium card - spans 6 cols, 2 rows */}
           <Link
             href={featuredWorks[3].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-12 md:col-span-6 row-span-2"
+            className={cn(
+              "portfolio-card col-span-12 md:col-span-6 row-span-2 transition-all duration-700",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            )}
+            style={{ transitionDelay: "400ms" }}
           >
             <Image
               src={featuredWorks[3].image}
               alt={featuredWorks[3].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="portfolio-card-image"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <div className="flex flex-wrap gap-2 mb-2">
+            <div className="portfolio-card-overlay" />
+            <div className="portfolio-card-content">
+              <div className="flex flex-wrap gap-1.5 md:gap-2 mb-1.5 md:mb-2">
                 {featuredWorks[3].tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs tracking-wide uppercase bg-white/10 backdrop-blur-sm text-white rounded-full"
-                  >
+                  <span key={tag} className="portfolio-card-tag">
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="font-serif text-xl lg:text-2xl text-white group-hover:text-white/90 transition-colors">
+              <h3 className="portfolio-card-title text-lg md:text-xl lg:text-2xl">
                 {featuredWorks[3].title}
               </h3>
-              <p className="mt-2 text-white/70 text-sm max-w-md hidden sm:block">
+              <p className="mt-1.5 md:mt-2 text-white/70 text-xs md:text-sm max-w-md hidden sm:block line-clamp-2">
                 {featuredWorks[3].description}
               </p>
             </div>
@@ -210,18 +247,22 @@ export function FeaturedWork() {
           {/* Small wide card - spans 6 cols, 1 row */}
           <Link
             href={featuredWorks[4].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-6 md:col-span-3 row-span-1"
+            className={cn(
+              "portfolio-card col-span-6 md:col-span-3 row-span-1 transition-all duration-700",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            )}
+            style={{ transitionDelay: "500ms" }}
           >
             <Image
               src={featuredWorks[4].image}
               alt={featuredWorks[4].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="portfolio-card-image"
               sizes="(max-width: 768px) 50vw, 25vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="font-serif text-base lg:text-lg text-white group-hover:text-white/90 transition-colors">
+            <div className="portfolio-card-overlay" />
+            <div className="portfolio-card-content p-3 md:p-4">
+              <h3 className="portfolio-card-title text-sm md:text-base lg:text-lg">
                 {featuredWorks[4].title}
               </h3>
             </div>
@@ -230,28 +271,29 @@ export function FeaturedWork() {
           {/* Medium tall card - spans 3 cols, 2 rows */}
           <Link
             href={featuredWorks[5].href}
-            className="group relative overflow-hidden rounded-xl bg-muted col-span-6 md:col-span-3 row-span-2"
+            className={cn(
+              "portfolio-card col-span-6 md:col-span-3 row-span-2 transition-all duration-700",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            )}
+            style={{ transitionDelay: "600ms" }}
           >
             <Image
               src={featuredWorks[5].image}
               alt={featuredWorks[5].title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="portfolio-card-image"
               sizes="(max-width: 768px) 50vw, 25vw"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 lg:p-5">
-              <div className="flex flex-wrap gap-1 mb-2">
+            <div className="portfolio-card-overlay" />
+            <div className="portfolio-card-content p-3 md:p-4 lg:p-5">
+              <div className="flex flex-wrap gap-1 mb-1.5 md:mb-2">
                 {featuredWorks[5].tags.slice(0, 2).map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs tracking-wide uppercase bg-white/10 backdrop-blur-sm text-white rounded-full"
-                  >
+                  <span key={tag} className="portfolio-card-tag text-[10px] md:text-xs">
                     {tag}
                   </span>
                 ))}
               </div>
-              <h3 className="font-serif text-lg lg:text-xl text-white group-hover:text-white/90 transition-colors">
+              <h3 className="portfolio-card-title text-base md:text-lg lg:text-xl">
                 {featuredWorks[5].title}
               </h3>
             </div>

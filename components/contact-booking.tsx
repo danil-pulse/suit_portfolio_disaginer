@@ -13,6 +13,7 @@ import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import { FieldGroup, Field, FieldLabel } from "@/components/ui/field"
 import { useLanguage } from "@/lib/language-context"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
 
 const timeSlots = [
   "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
@@ -24,6 +25,7 @@ export function ContactBooking() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const { t } = useLanguage()
+  const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>()
 
   const serviceTypes = [
     { value: "portrait", label: t.contact.serviceTypes.portrait },
@@ -39,7 +41,6 @@ export function ContactBooking() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 1500))
     setIsLoading(false)
     setIsSubmitted(true)
@@ -47,19 +48,19 @@ export function ContactBooking() {
 
   if (isSubmitted) {
     return (
-      <section id="contact" className="py-24 lg:py-32">
-        <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 text-accent mb-6">
-            <CheckCircle className="h-8 w-8" />
+      <section id="contact" className="section-padding">
+        <div className="mx-auto max-w-3xl container-padding text-center animate-scale-in">
+          <div className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-accent/10 text-accent mb-4 md:mb-6">
+            <CheckCircle className="h-6 w-6 md:h-8 md:w-8" />
           </div>
-          <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-foreground mb-3 md:mb-4">
             {t.contact.thankYou}
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-base md:text-lg">
             {t.contact.thankYouMessage}
           </p>
           <Button 
-            className="mt-8"
+            className="mt-6 md:mt-8 hover-lift"
             onClick={() => setIsSubmitted(false)}
           >
             {t.contact.sendAnother}
@@ -70,53 +71,64 @@ export function ContactBooking() {
   }
 
   return (
-    <section id="contact" className="py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="section-padding"
+    >
+      <div className="mx-auto max-w-7xl container-padding">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
           {/* Contact Info */}
-          <div>
-            <p className="text-sm tracking-widest uppercase text-muted-foreground mb-2">
-              {t.contact.subtitle}
-            </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
-              {t.contact.title}
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-10">
+          <div
+            className={cn(
+              "transition-all duration-700",
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+            )}
+          >
+            <div className="section-header">
+              <p className="section-subtitle">
+                {t.contact.subtitle}
+              </p>
+              <h2 className="section-title mb-4 md:mb-6">
+                {t.contact.title}
+              </h2>
+            </div>
+            <p className="text-muted-foreground leading-relaxed mb-8 md:mb-10 text-sm md:text-base">
               {t.contact.description}
             </p>
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-secondary text-foreground">
-                  <Mail className="h-5 w-5" />
+            <div className="space-y-4 md:space-y-6">
+              <div className="contact-info-item">
+                <div className="contact-info-icon">
+                  <Mail className="h-4 w-4 md:h-5 md:w-5" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">{t.contact.email}</p>
-                  <a href="mailto:hello@ilyaoblog.com" className="text-foreground hover:text-accent transition-colors">
+                  <p className="text-xs md:text-sm text-muted-foreground">{t.contact.email}</p>
+                  <a href="mailto:hello@ilyaoblog.com" className="text-foreground hover:text-accent transition-colors text-sm md:text-base">
                     hello@ilyaoblog.com
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-secondary text-foreground">
-                  <Phone className="h-5 w-5" />
+              <div className="contact-info-item">
+                <div className="contact-info-icon">
+                  <Phone className="h-4 w-4 md:h-5 md:w-5" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">{t.contact.phone}</p>
-                  <a href="tel:+12125551234" className="text-foreground hover:text-accent transition-colors">
+                  <p className="text-xs md:text-sm text-muted-foreground">{t.contact.phone}</p>
+                  <a href="tel:+12125551234" className="text-foreground hover:text-accent transition-colors text-sm md:text-base">
                     +1 (212) 555-1234
                   </a>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-lg bg-secondary text-foreground">
-                  <MapPin className="h-5 w-5" />
+              <div className="contact-info-item">
+                <div className="contact-info-icon">
+                  <MapPin className="h-4 w-4 md:h-5 md:w-5" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">{t.contact.studio}</p>
-                  <p className="text-foreground whitespace-pre-line">
+                  <p className="text-xs md:text-sm text-muted-foreground">{t.contact.studio}</p>
+                  <p className="text-foreground whitespace-pre-line text-sm md:text-base">
                     {t.contact.address}
                   </p>
                 </div>
@@ -124,57 +136,63 @@ export function ContactBooking() {
             </div>
 
             {/* Social Links */}
-            <div className="mt-10 pt-10 border-t border-border">
-              <p className="text-sm text-muted-foreground mb-4">{t.contact.followAlong}</p>
-              <div className="flex items-center gap-4">
+            <div className="mt-8 md:mt-10 pt-8 md:pt-10 border-t border-border">
+              <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">{t.contact.followAlong}</p>
+              <div className="flex items-center gap-3 md:gap-4">
                 <a
                   href="#"
-                  className="p-3 rounded-lg bg-secondary text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className="contact-social-link"
                   aria-label="Instagram"
                 >
-                  <Instagram className="h-5 w-5" />
+                  <Instagram className="h-4 w-4 md:h-5 md:w-5" />
                 </a>
                 <a
                   href="#"
-                  className="p-3 rounded-lg bg-secondary text-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className="contact-social-link"
                   aria-label="LinkedIn"
                 >
-                  <Linkedin className="h-5 w-5" />
+                  <Linkedin className="h-4 w-4 md:h-5 md:w-5" />
                 </a>
               </div>
             </div>
           </div>
 
           {/* Form */}
-          <div className="bg-card border border-border rounded-2xl p-6 lg:p-8">
+          <div
+            className={cn(
+              "contact-form-container transition-all duration-700",
+              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
+            )}
+            style={{ transitionDelay: "200ms" }}
+          >
             <Tabs defaultValue="inquiry" className="w-full">
-              <TabsList className="w-full grid grid-cols-2 mb-8">
-                <TabsTrigger value="inquiry">{t.contact.generalInquiry}</TabsTrigger>
-                <TabsTrigger value="booking">{t.contact.bookSession}</TabsTrigger>
+              <TabsList className="w-full grid grid-cols-2 mb-6 md:mb-8">
+                <TabsTrigger value="inquiry" className="text-xs md:text-sm">{t.contact.generalInquiry}</TabsTrigger>
+                <TabsTrigger value="booking" className="text-xs md:text-sm">{t.contact.bookSession}</TabsTrigger>
               </TabsList>
 
               <TabsContent value="inquiry">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                     <Field>
-                      <FieldLabel htmlFor="firstName">{t.contact.firstName}</FieldLabel>
-                      <Input id="firstName" placeholder="John" required />
+                      <FieldLabel htmlFor="firstName" className="text-xs md:text-sm">{t.contact.firstName}</FieldLabel>
+                      <Input id="firstName" placeholder="John" required className="text-sm md:text-base" />
                     </Field>
                     <Field>
-                      <FieldLabel htmlFor="lastName">{t.contact.lastName}</FieldLabel>
-                      <Input id="lastName" placeholder="Doe" required />
+                      <FieldLabel htmlFor="lastName" className="text-xs md:text-sm">{t.contact.lastName}</FieldLabel>
+                      <Input id="lastName" placeholder="Doe" required className="text-sm md:text-base" />
                     </Field>
                   </FieldGroup>
 
                   <Field>
-                    <FieldLabel htmlFor="email">{t.contact.emailLabel}</FieldLabel>
-                    <Input id="email" type="email" placeholder="john@example.com" required />
+                    <FieldLabel htmlFor="email" className="text-xs md:text-sm">{t.contact.emailLabel}</FieldLabel>
+                    <Input id="email" type="email" placeholder="john@example.com" required className="text-sm md:text-base" />
                   </Field>
 
                   <Field>
-                    <FieldLabel htmlFor="service">{t.contact.serviceInterested}</FieldLabel>
+                    <FieldLabel htmlFor="service" className="text-xs md:text-sm">{t.contact.serviceInterested}</FieldLabel>
                     <Select>
-                      <SelectTrigger>
+                      <SelectTrigger className="text-sm md:text-base">
                         <SelectValue placeholder={t.contact.selectService} />
                       </SelectTrigger>
                       <SelectContent>
@@ -188,16 +206,17 @@ export function ContactBooking() {
                   </Field>
 
                   <Field>
-                    <FieldLabel htmlFor="message">{t.contact.message}</FieldLabel>
+                    <FieldLabel htmlFor="message" className="text-xs md:text-sm">{t.contact.message}</FieldLabel>
                     <Textarea
                       id="message"
                       placeholder={t.contact.messagePlaceholder}
-                      rows={5}
+                      rows={4}
                       required
+                      className="text-sm md:text-base resize-none"
                     />
                   </Field>
 
-                  <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+                  <Button type="submit" className="w-full hover-lift" size="lg" disabled={isLoading}>
                     {isLoading ? (
                       t.contact.sending
                     ) : (
@@ -211,33 +230,33 @@ export function ContactBooking() {
               </TabsContent>
 
               <TabsContent value="booking">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                     <Field>
-                      <FieldLabel htmlFor="bookingFirstName">{t.contact.firstName}</FieldLabel>
-                      <Input id="bookingFirstName" placeholder="John" required />
+                      <FieldLabel htmlFor="bookingFirstName" className="text-xs md:text-sm">{t.contact.firstName}</FieldLabel>
+                      <Input id="bookingFirstName" placeholder="John" required className="text-sm md:text-base" />
                     </Field>
                     <Field>
-                      <FieldLabel htmlFor="bookingLastName">{t.contact.lastName}</FieldLabel>
-                      <Input id="bookingLastName" placeholder="Doe" required />
+                      <FieldLabel htmlFor="bookingLastName" className="text-xs md:text-sm">{t.contact.lastName}</FieldLabel>
+                      <Input id="bookingLastName" placeholder="Doe" required className="text-sm md:text-base" />
                     </Field>
                   </FieldGroup>
 
-                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                     <Field>
-                      <FieldLabel htmlFor="bookingEmail">{t.contact.emailLabel}</FieldLabel>
-                      <Input id="bookingEmail" type="email" placeholder="john@example.com" required />
+                      <FieldLabel htmlFor="bookingEmail" className="text-xs md:text-sm">{t.contact.emailLabel}</FieldLabel>
+                      <Input id="bookingEmail" type="email" placeholder="john@example.com" required className="text-sm md:text-base" />
                     </Field>
                     <Field>
-                      <FieldLabel htmlFor="bookingPhone">{t.contact.phoneLabel}</FieldLabel>
-                      <Input id="bookingPhone" type="tel" placeholder="+1 (555) 000-0000" />
+                      <FieldLabel htmlFor="bookingPhone" className="text-xs md:text-sm">{t.contact.phoneLabel}</FieldLabel>
+                      <Input id="bookingPhone" type="tel" placeholder="+1 (555) 000-0000" className="text-sm md:text-base" />
                     </Field>
                   </FieldGroup>
 
                   <Field>
-                    <FieldLabel htmlFor="bookingService">{t.contact.serviceType}</FieldLabel>
+                    <FieldLabel htmlFor="bookingService" className="text-xs md:text-sm">{t.contact.serviceType}</FieldLabel>
                     <Select>
-                      <SelectTrigger>
+                      <SelectTrigger className="text-sm md:text-base">
                         <SelectValue placeholder={t.contact.selectService} />
                       </SelectTrigger>
                       <SelectContent>
@@ -250,15 +269,15 @@ export function ContactBooking() {
                     </Select>
                   </Field>
 
-                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                     <Field>
-                      <FieldLabel>{t.contact.preferredDate}</FieldLabel>
+                      <FieldLabel className="text-xs md:text-sm">{t.contact.preferredDate}</FieldLabel>
                       <Popover>
                         <PopoverTrigger asChild>
                           <Button
                             variant="outline"
                             className={cn(
-                              "w-full justify-start text-left font-normal",
+                              "w-full justify-start text-left font-normal text-sm md:text-base",
                               !date && "text-muted-foreground"
                             )}
                           >
@@ -280,9 +299,9 @@ export function ContactBooking() {
                       </Popover>
                     </Field>
                     <Field>
-                      <FieldLabel htmlFor="timeSlot">{t.contact.preferredTime}</FieldLabel>
+                      <FieldLabel htmlFor="timeSlot" className="text-xs md:text-sm">{t.contact.preferredTime}</FieldLabel>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="text-sm md:text-base">
                           <SelectValue placeholder={t.contact.selectTime} />
                         </SelectTrigger>
                         <SelectContent>
@@ -297,16 +316,17 @@ export function ContactBooking() {
                   </FieldGroup>
 
                   <Field>
-                    <FieldLabel htmlFor="bookingDetails">{t.contact.projectDetails}</FieldLabel>
+                    <FieldLabel htmlFor="bookingDetails" className="text-xs md:text-sm">{t.contact.projectDetails}</FieldLabel>
                     <Textarea
                       id="bookingDetails"
                       placeholder={t.contact.projectDetailsPlaceholder}
-                      rows={4}
+                      rows={3}
                       required
+                      className="text-sm md:text-base resize-none"
                     />
                   </Field>
 
-                  <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
+                  <Button type="submit" className="w-full hover-lift" size="lg" disabled={isLoading}>
                     {isLoading ? (
                       t.contact.requesting
                     ) : (
@@ -317,7 +337,7 @@ export function ContactBooking() {
                     )}
                   </Button>
 
-                  <p className="text-xs text-center text-muted-foreground">
+                  <p className="text-[10px] md:text-xs text-center text-muted-foreground">
                     {t.contact.confirmNote}
                   </p>
                 </form>

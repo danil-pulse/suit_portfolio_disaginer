@@ -5,9 +5,12 @@ import Image from "next/image"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "@/lib/language-context"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { cn } from "@/lib/utils"
 
 export function PhotographyGallery() {
   const { t } = useLanguage()
+  const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>()
   const [selectedPhoto, setSelectedPhoto] = useState<{
     id: number
     src: string
@@ -106,29 +109,44 @@ export function PhotographyGallery() {
     : photos.filter(photo => photo.category === activeCategory)
 
   return (
-    <section id="photography" className="py-24 lg:py-32 bg-secondary/30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-          <div>
-            <p className="text-sm tracking-widest uppercase text-muted-foreground mb-2">
+    <section
+      id="photography"
+      ref={sectionRef}
+      className="section-padding bg-secondary/30"
+    >
+      <div className="mx-auto max-w-7xl container-padding">
+        <div
+          className={cn(
+            "flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-8 md:mb-12 transition-all duration-700",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          )}
+        >
+          <div className="section-header mb-0">
+            <p className="section-subtitle">
               {t.photography.subtitle}
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground">
+            <h2 className="section-title">
               {t.photography.title}
             </h2>
           </div>
-          <p className="text-muted-foreground max-w-md text-pretty">
+          <p className="section-description">
             {t.photography.description}
           </p>
         </div>
 
         <Tabs defaultValue="all" className="w-full" onValueChange={setActiveCategory}>
-          <TabsList className="w-full flex flex-wrap justify-start gap-2 h-auto bg-transparent p-0 mb-8">
+          <TabsList
+            className={cn(
+              "category-tabs transition-all duration-700",
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            )}
+            style={{ transitionDelay: "100ms" }}
+          >
             {categories.map((category) => (
               <TabsTrigger
                 key={category.id}
                 value={category.id}
-                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-full px-6 py-2 text-sm tracking-wide uppercase border border-border transition-all"
+                className="category-tab"
               >
                 {category.label}
               </TabsTrigger>
@@ -136,27 +154,28 @@ export function PhotographyGallery() {
           </TabsList>
 
           <TabsContent value={activeCategory} className="mt-0">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+            <div className="photo-grid">
               {filteredPhotos.map((photo, index) => (
                 <button
                   key={photo.id}
                   onClick={() => setSelectedPhoto(photo)}
-                  className="group relative aspect-[4/5] overflow-hidden rounded-lg bg-muted cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                  }}
+                  className={cn(
+                    "photo-card transition-all duration-500",
+                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  )}
+                  style={{ transitionDelay: `${(index + 2) * 100}ms` }}
                 >
                   <Image
                     src={photo.src}
                     alt={photo.alt}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="photo-card-image"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <p className="text-white font-serif text-xl">{photo.title}</p>
-                    <p className="text-white/70 text-sm mt-1">{photo.description}</p>
+                  <div className="photo-card-overlay" />
+                  <div className="photo-card-content">
+                    <p className="photo-card-title">{photo.title}</p>
+                    <p className="photo-card-description">{photo.description}</p>
                   </div>
                 </button>
               ))}
@@ -169,7 +188,7 @@ export function PhotographyGallery() {
       <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
         <DialogContent className="max-w-5xl w-full p-0 bg-black border-0 overflow-hidden">
           {selectedPhoto && (
-            <div className="relative">
+            <div className="relative animate-scale-in">
               <div className="relative aspect-[3/2] w-full">
                 <Image
                   src={selectedPhoto.src}
@@ -179,9 +198,9 @@ export function PhotographyGallery() {
                   sizes="100vw"
                 />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                <p className="text-white font-serif text-2xl">{selectedPhoto.title}</p>
-                <p className="text-white/70 mt-1">{selectedPhoto.description}</p>
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/80 to-transparent">
+                <p className="text-white font-serif text-xl md:text-2xl">{selectedPhoto.title}</p>
+                <p className="text-white/70 mt-1 text-sm md:text-base">{selectedPhoto.description}</p>
               </div>
             </div>
           )}

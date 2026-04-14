@@ -1,10 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/lib/language-context"
+import { useScrollAnimation } from "@/hooks/use-scroll-animation"
+import { cn } from "@/lib/utils"
 
 const testimonialImages = [
   "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=200&q=80",
@@ -15,7 +17,9 @@ const testimonialImages = [
 
 export function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
   const { t } = useLanguage()
+  const { ref: sectionRef, isVisible } = useScrollAnimation<HTMLElement>()
 
   const testimonials = t.testimonialsData.map((item, index) => ({
     ...item,
@@ -24,39 +28,80 @@ export function Testimonials() {
   }))
 
   const next = () => {
+    if (isAnimating) return
+    setIsAnimating(true)
     setCurrentIndex((current) => (current + 1) % testimonials.length)
   }
 
   const prev = () => {
+    if (isAnimating) return
+    setIsAnimating(true)
     setCurrentIndex((current) => (current - 1 + testimonials.length) % testimonials.length)
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsAnimating(false), 500)
+    return () => clearTimeout(timer)
+  }, [currentIndex])
+
+  // Auto-advance testimonials
+  useEffect(() => {
+    const interval = setInterval(() => {
+      next()
+    }, 6000)
+    return () => clearInterval(interval)
+  }, [currentIndex])
 
   const currentTestimonial = testimonials[currentIndex]
 
   return (
-    <section className="py-24 lg:py-32 bg-primary text-primary-foreground">
-      <div className="mx-auto max-w-4xl px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-sm tracking-widest uppercase text-primary-foreground/60 mb-2">
+    <section
+      ref={sectionRef}
+      className="testimonial-section"
+    >
+      <div className="mx-auto max-w-4xl container-padding">
+        <div
+          className={cn(
+            "text-center mb-8 md:mb-12 transition-all duration-700",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          )}
+        >
+          <p className="text-xs md:text-sm tracking-widest uppercase text-primary-foreground/60 mb-2">
             {t.testimonials.subtitle}
           </p>
-          <h2 className="font-serif text-3xl md:text-4xl">
+          <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl">
             {t.testimonials.title}
           </h2>
         </div>
 
-        <div className="relative min-h-[320px] flex flex-col">
+        <div
+          className={cn(
+            "relative min-h-[280px] md:min-h-[320px] flex flex-col transition-all duration-700",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          )}
+          style={{ transitionDelay: "200ms" }}
+        >
           <div className="flex flex-col items-center text-center flex-1">
-            <div className="mb-6 text-primary-foreground/30">
-              <Quote className="h-10 w-10" />
+            <div className="mb-4 md:mb-6 text-primary-foreground/30">
+              <Quote className="h-8 w-8 md:h-10 md:w-10" />
             </div>
             
-            <blockquote className="text-lg leading-relaxed text-pretty max-w-3xl mb-8 min-h-[120px] flex items-center">
+            <blockquote
+              className={cn(
+                "testimonial-quote mb-6 md:mb-8 transition-all duration-500",
+                isAnimating ? "opacity-0 scale-95" : "opacity-100 scale-100"
+              )}
+            >
               <span>&ldquo;{currentTestimonial.quote}&rdquo;</span>
             </blockquote>
 
-            <div className="flex items-center gap-4">
-              <div className="relative w-14 h-14 rounded-full overflow-hidden">
+            <div
+              className={cn(
+                "testimonial-author transition-all duration-500",
+                isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+              )}
+            >
+              <div className="testimonial-avatar">
                 <Image
                   src={currentTestimonial.image}
                   alt={currentTestimonial.author}
@@ -66,10 +111,10 @@ export function Testimonials() {
                 />
               </div>
               <div className="text-left">
-                <p className="font-medium text-primary-foreground">
+                <p className="testimonial-name text-sm md:text-base">
                   {currentTestimonial.author}
                 </p>
-                <p className="text-sm text-primary-foreground/60">
+                <p className="testimonial-role text-xs md:text-sm">
                   {currentTestimonial.role}
                 </p>
               </div>
@@ -77,27 +122,31 @@ export function Testimonials() {
           </div>
 
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="testimonial-nav">
             <Button
               variant="outline"
               size="icon"
               onClick={prev}
-              className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+              className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground h-9 w-9 md:h-10 md:w-10"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4 md:h-5 md:w-5" />
             </Button>
             
             <div className="flex items-center gap-2">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === currentIndex 
-                      ? "bg-primary-foreground" 
-                      : "bg-primary-foreground/30"
-                  }`}
+                  onClick={() => {
+                    if (!isAnimating) {
+                      setIsAnimating(true)
+                      setCurrentIndex(index)
+                    }
+                  }}
+                  className={cn(
+                    "testimonial-dot transition-all duration-300",
+                    index === currentIndex ? "active w-4" : "w-2"
+                  )}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}
@@ -107,10 +156,10 @@ export function Testimonials() {
               variant="outline"
               size="icon"
               onClick={next}
-              className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+              className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground h-9 w-9 md:h-10 md:w-10"
               aria-label="Next testimonial"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 w-4 md:h-5 md:w-5" />
             </Button>
           </div>
         </div>
