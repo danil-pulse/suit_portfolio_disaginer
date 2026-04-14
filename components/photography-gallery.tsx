@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useLanguage } from "@/lib/language-context"
 import { useScrollAnimation } from "@/hooks/use-scroll-animation"
@@ -160,7 +160,7 @@ export function PhotographyGallery() {
                   key={photo.id}
                   onClick={() => setSelectedPhoto(photo)}
                   className={cn(
-                    "photo-card transition-all duration-500",
+                    "photo-card relative transition-all duration-500",
                     isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                   )}
                   style={{ transitionDelay: `${(index + 2) * 100}ms` }}
@@ -186,7 +186,8 @@ export function PhotographyGallery() {
 
       {/* Lightbox Dialog */}
       <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
-        <DialogContent className="max-w-5xl w-full p-0 bg-black border-0 overflow-hidden">
+        <DialogContent className="max-w-5xl w-full p-0 bg-black border-0 overflow-hidden" aria-describedby={undefined}>
+          <DialogTitle className="sr-only">{selectedPhoto?.title || "Photo"}</DialogTitle>
           {selectedPhoto && (
             <div className="relative animate-scale-in">
               <div className="relative aspect-[3/2] w-full">

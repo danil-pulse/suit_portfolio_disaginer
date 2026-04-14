@@ -169,7 +169,7 @@ export function DesignPortfolio() {
         <DialogContent className="max-w-3xl w-[95vw] md:w-full p-0 overflow-hidden">
           {selectedProject && (
             <div className="animate-scale-in">
-              <div className="relative aspect-[16/9] w-full bg-muted">
+              <div className="relative aspect-[16/9] w-full bg-muted overflow-hidden">
                 <Image
                   src={selectedProject.image}
                   alt={selectedProject.title}

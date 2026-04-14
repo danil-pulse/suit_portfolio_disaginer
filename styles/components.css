@@ -97,7 +97,7 @@
 /* Card Components */
 @layer components {
   .portfolio-card {
-    @apply group relative overflow-hidden rounded-xl bg-muted;
+    @apply group overflow-hidden rounded-xl bg-muted;
     @apply transition-all duration-500;
   }
 
@@ -187,7 +187,7 @@
   }
 
   .photo-card {
-    @apply group relative aspect-[4/5] overflow-hidden rounded-lg bg-muted cursor-pointer;
+    @apply group aspect-[4/5] overflow-hidden rounded-lg bg-muted cursor-pointer;
     @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
     @apply transition-all duration-300;
   }

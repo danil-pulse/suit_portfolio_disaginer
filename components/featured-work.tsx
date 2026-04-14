@@ -125,7 +125,7 @@ export function FeaturedWork() {
           <Link
             href={featuredWorks[0].href}
             className={cn(
-              "portfolio-card col-span-12 md:col-span-8 row-span-2 md:row-span-3 transition-all duration-700",
+              "portfolio-card col-span-12 md:col-span-8 row-span-2 md:row-span-3 relative transition-all duration-700",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
             style={{ transitionDelay: "100ms" }}
@@ -159,7 +159,7 @@ export function FeaturedWork() {
           <Link
             href={featuredWorks[1].href}
             className={cn(
-              "portfolio-card col-span-6 md:col-span-4 row-span-2 transition-all duration-700",
+              "portfolio-card col-span-6 md:col-span-4 row-span-2 relative transition-all duration-700",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
             style={{ transitionDelay: "200ms" }}
@@ -190,7 +190,7 @@ export function FeaturedWork() {
           <Link
             href={featuredWorks[2].href}
             className={cn(
-              "portfolio-card col-span-6 md:col-span-4 row-span-1 transition-all duration-700",
+              "portfolio-card col-span-6 md:col-span-4 row-span-1 relative transition-all duration-700",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
             style={{ transitionDelay: "300ms" }}
@@ -214,7 +214,7 @@ export function FeaturedWork() {
           <Link
             href={featuredWorks[3].href}
             className={cn(
-              "portfolio-card col-span-12 md:col-span-6 row-span-2 transition-all duration-700",
+              "portfolio-card col-span-12 md:col-span-6 row-span-2 relative transition-all duration-700",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
             style={{ transitionDelay: "400ms" }}
@@ -248,7 +248,7 @@ export function FeaturedWork() {
           <Link
             href={featuredWorks[4].href}
             className={cn(
-              "portfolio-card col-span-6 md:col-span-3 row-span-1 transition-all duration-700",
+              "portfolio-card col-span-6 md:col-span-3 row-span-1 relative transition-all duration-700",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
             style={{ transitionDelay: "500ms" }}
@@ -272,7 +272,7 @@ export function FeaturedWork() {
           <Link
             href={featuredWorks[5].href}
             className={cn(
-              "portfolio-card col-span-6 md:col-span-3 row-span-2 transition-all duration-700",
+              "portfolio-card col-span-6 md:col-span-3 row-span-2 relative transition-all duration-700",
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             )}
             style={{ transitionDelay: "600ms" }}

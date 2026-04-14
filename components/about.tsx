@@ -60,7 +60,7 @@ export function About() {
               isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
             )}
           >
-            <div className="relative aspect-[4/5] rounded-xl overflow-hidden">
+            <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-muted">
               <Image
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
                 alt={t.header.title}
