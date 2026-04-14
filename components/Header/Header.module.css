@@ -146,3 +146,9 @@
 .header__mobile-book-button {
   margin-top: 1rem;
 }
+
+/* Стили для мобильного меню */
+.header__sheet-content {
+  width: 100%;
+  max-width: 24rem;
+}

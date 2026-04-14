@@ -263,3 +263,8 @@
   color: rgba(255, 255, 255, 0.7);
   margin-top: 0.25rem;
 }
+
+/* Стили для табов */
+.photography-gallery__tabs {
+  width: 100%;
+}

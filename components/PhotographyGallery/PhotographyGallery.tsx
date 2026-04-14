@@ -123,7 +123,7 @@ export function PhotographyGallery() {
           </p>
         </div>
 
-        <Tabs defaultValue="all" className="w-full" onValueChange={setActiveCategory}>
+        <Tabs defaultValue="all" className={styles["photography-gallery__tabs"]} onValueChange={setActiveCategory}>
           <TabsList className={styles["photography-gallery__filters"]}>
             {categories.map((category) => (
               <TabsTrigger

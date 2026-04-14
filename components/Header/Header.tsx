@@ -61,7 +61,7 @@ export function Header() {
                   <span className="sr-only">Toggle menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full max-w-sm">
+              <SheetContent side="right" className={styles["header__sheet-content"]}>
                 <div className={styles["header__mobile-menu"]}>
                   {navItems.map((item) => (
                     <Link
