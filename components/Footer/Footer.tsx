@@ -28,7 +28,7 @@ const WhatsAppIcon = () => (
 // Компонент для иконки Max (использует изображение)
 const MaxIcon = () => (
   <Image
-    src="/images/max-logo-white.png"
+    src="/images/max-logo-white.svg"
     alt="Max"
     width={16}
     height={16}
