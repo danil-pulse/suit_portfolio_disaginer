@@ -1,0 +1,330 @@
+/* =============================================================================
+   FEATURED WORK COMPONENT STYLES
+   Секция избранных работ (Bento Grid)
+   ============================================================================= */
+
+.featured-work {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 1024px) {
+  .featured-work {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.featured-work__container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .featured-work__container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* =============================================================================
+   ЗАГОЛОВОК СЕКЦИИ
+   ============================================================================= */
+
+.featured-work__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.featured-work__subtitle {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.featured-work__title {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  color: var(--foreground);
+}
+
+@media (min-width: 768px) {
+  .featured-work__title {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .featured-work__title {
+    font-size: 3rem;
+  }
+}
+
+/* Навигационные ссылки */
+.featured-work__nav-links {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .featured-work__nav-links {
+    display: flex;
+  }
+}
+
+.featured-work__nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.featured-work__nav-link:hover {
+  color: var(--foreground);
+}
+
+.featured-work__nav-link:hover .featured-work__nav-arrow {
+  transform: translateX(0.25rem);
+}
+
+.featured-work__nav-arrow {
+  transition: transform 0.2s ease;
+}
+
+/* =============================================================================
+   BENTO GRID
+   ============================================================================= */
+
+.featured-work__grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  grid-auto-rows: minmax(140px, 1fr);
+}
+
+@media (min-width: 1024px) {
+  .featured-work__grid {
+    gap: 1.5rem;
+  }
+}
+
+/* =============================================================================
+   КАРТОЧКИ РАБОТ
+   ============================================================================= */
+
+.featured-work__card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background-color: var(--muted);
+  text-decoration: none;
+  display: block;
+}
+
+.featured-work__card:hover .featured-work__card-image {
+  transform: scale(1.05);
+}
+
+/* Размеры карточек */
+.featured-work__card--large {
+  grid-column: span 12;
+  grid-row: span 3;
+}
+
+@media (min-width: 768px) {
+  .featured-work__card--large {
+    grid-column: span 8;
+  }
+}
+
+.featured-work__card--tall {
+  grid-column: span 12;
+  grid-row: span 2;
+}
+
+@media (min-width: 768px) {
+  .featured-work__card--tall {
+    grid-column: span 4;
+  }
+}
+
+.featured-work__card--small {
+  grid-column: span 6;
+  grid-row: span 1;
+}
+
+@media (min-width: 768px) {
+  .featured-work__card--small {
+    grid-column: span 4;
+  }
+}
+
+.featured-work__card--medium {
+  grid-column: span 12;
+  grid-row: span 2;
+}
+
+@media (min-width: 768px) {
+  .featured-work__card--medium {
+    grid-column: span 6;
+  }
+}
+
+.featured-work__card--wide {
+  grid-column: span 6;
+  grid-row: span 1;
+}
+
+@media (min-width: 768px) {
+  .featured-work__card--wide {
+    grid-column: span 3;
+  }
+}
+
+.featured-work__card--medium-tall {
+  grid-column: span 6;
+  grid-row: span 2;
+}
+
+@media (min-width: 768px) {
+  .featured-work__card--medium-tall {
+    grid-column: span 3;
+  }
+}
+
+/* Изображение карточки */
+.featured-work__card-image {
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+/* Градиентный оверлей */
+.featured-work__card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2) 50%, transparent);
+}
+
+.featured-work__card-overlay--dark {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3) 50%, transparent);
+}
+
+/* Контент карточки */
+.featured-work__card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .featured-work__card-content--large {
+    padding: 2rem;
+  }
+}
+
+.featured-work__card-content--small {
+  padding: 1rem;
+}
+
+/* Теги */
+.featured-work__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.featured-work__tags--small {
+  margin-bottom: 0.5rem;
+}
+
+.featured-work__tag {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  color: white;
+  border-radius: 9999px;
+}
+
+.featured-work__tag--small {
+  padding: 0.125rem 0.5rem;
+}
+
+/* Заголовок карточки */
+.featured-work__card-title {
+  font-family: var(--font-serif);
+  color: white;
+  transition: color 0.2s ease;
+}
+
+.featured-work__card:hover .featured-work__card-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.featured-work__card-title--large {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .featured-work__card-title--large {
+    font-size: 1.875rem;
+  }
+}
+
+.featured-work__card-title--medium {
+  font-size: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .featured-work__card-title--medium {
+    font-size: 1.5rem;
+  }
+}
+
+.featured-work__card-title--small {
+  font-size: 1.125rem;
+}
+
+.featured-work__card-title--base {
+  font-size: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .featured-work__card-title--base {
+    font-size: 1.125rem;
+  }
+}
+
+/* Описание карточки */
+.featured-work__card-description {
+  margin-top: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  max-width: 28rem;
+}
+
+.featured-work__card-description--hidden {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .featured-work__card-description--hidden {
+    display: block;
+  }
+}

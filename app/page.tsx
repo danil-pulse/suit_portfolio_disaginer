@@ -1,12 +1,12 @@
-import { Header } from "@/components/header"
-import { Hero } from "@/components/hero"
-import { FeaturedWork } from "@/components/featured-work"
-import { PhotographyGallery } from "@/components/photography-gallery"
-import { DesignPortfolio } from "@/components/design-portfolio"
-import { About } from "@/components/about"
-import { Testimonials } from "@/components/testimonials"
-import { ContactBooking } from "@/components/contact-booking"
-import { Footer } from "@/components/footer"
+import { Header } from "@/components/Header"
+import { Hero } from "@/components/Hero"
+import { FeaturedWork } from "@/components/FeaturedWork"
+import { PhotographyGallery } from "@/components/PhotographyGallery"
+import { DesignPortfolio } from "@/components/DesignPortfolio"
+import { About } from "@/components/About"
+import { Testimonials } from "@/components/Testimonials"
+import { ContactBooking } from "@/components/ContactBooking"
+import { Footer } from "@/components/Footer"
 
 export default function HomePage() {
   return (

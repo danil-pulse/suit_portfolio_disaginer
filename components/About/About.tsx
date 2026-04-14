@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Award, Camera, Palette, Users } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import styles from "./About.module.css"
 
 export function About() {
   const { t } = useLanguage()
@@ -42,51 +43,51 @@ export function About() {
   ]
 
   return (
-    <section id="about" className="py-24 lg:py-32 bg-secondary/30">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+    <section id="about" className={styles.about}>
+      <div className={styles.about__container}>
+        <div className={styles["about__main-grid"]}>
           {/* Image */}
-          <div className="relative">
-            <div className="relative aspect-[4/5] rounded-xl overflow-hidden">
+          <div className={styles["about__image-section"]}>
+            <div className={styles["about__image-wrapper"]}>
               <Image
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
                 alt={t.header.title}
                 fill
-                className="object-cover"
+                className={styles.about__image}
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
             {/* Floating Stats Card */}
-            <div className="absolute -bottom-6 -right-6 lg:-right-12 bg-card border border-border rounded-xl p-6 shadow-lg">
-              <p className="text-4xl font-serif text-foreground">10+</p>
-              <p className="text-sm text-muted-foreground">{t.about.yearsExperience}</p>
+            <div className={styles["about__floating-card"]}>
+              <p className={styles["about__floating-value"]}>10+</p>
+              <p className={styles["about__floating-label"]}>{t.about.yearsExperience}</p>
             </div>
           </div>
 
           {/* Content */}
-          <div>
-            <p className="text-sm tracking-widest uppercase text-muted-foreground mb-2">
+          <div className={styles["about__content-section"]}>
+            <p className={styles.about__subtitle}>
               {t.about.subtitle}
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
+            <h2 className={styles.about__title}>
               {t.about.title}
             </h2>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <div className={styles.about__bio}>
               <p>{t.about.bio1}</p>
               <p>{t.about.bio2}</p>
               <p>{t.about.bio3}</p>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 gap-6 mt-10">
+            <div className={styles["about__stats-grid"]}>
               {stats.map((stat) => (
-                <div key={stat.label} className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-accent/10 text-accent">
+                <div key={stat.label} className={styles["about__stat-item"]}>
+                  <div className={styles["about__stat-icon"]}>
                     <stat.icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-2xl font-serif text-foreground">{stat.value}</p>
-                    <p className="text-sm text-muted-foreground">{stat.label}</p>
+                    <p className={styles["about__stat-value"]}>{stat.value}</p>
+                    <p className={styles["about__stat-label"]}>{stat.label}</p>
                   </div>
                 </div>
               ))}
@@ -95,26 +96,23 @@ export function About() {
         </div>
 
         {/* Services */}
-        <div className="mt-24">
-          <div className="text-center mb-12">
-            <p className="text-sm tracking-widest uppercase text-muted-foreground mb-2">
+        <div className={styles["about__services-section"]}>
+          <div className={styles["about__services-header"]}>
+            <p className={styles["about__services-subtitle"]}>
               {t.about.servicesTitle}
             </p>
-            <h3 className="font-serif text-3xl md:text-4xl text-foreground">
+            <h3 className={styles["about__services-title"]}>
               {t.about.servicesSubtitle}
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className={styles["about__services-grid"]}>
             {services.map((service) => (
-              <div
-                key={service.title}
-                className="group p-6 bg-card border border-border rounded-xl hover:shadow-lg hover:border-accent/30 transition-all duration-300"
-              >
-                <h4 className="font-serif text-xl text-foreground group-hover:text-accent transition-colors">
+              <div key={service.title} className={styles["about__service-card"]}>
+                <h4 className={styles["about__service-title"]}>
                   {service.title}
                 </h4>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className={styles["about__service-description"]}>
                   {service.description}
                 </p>
               </div>
